@@ -1,6 +1,7 @@
 package main
 
 import (
+	"changeme/pkg/sys"
 	"embed"
 
 	"github.com/wailsapp/wails/v2"
@@ -13,8 +14,8 @@ var assets embed.FS
 
 func main() {
 	// Create an instance of the app structure
-	app := NewApp()
-	// stats := &sys.Stats{}
+	// app := NewApp()
+	stats := &sys.Stats{}
 
 	// Create application with options
 
@@ -28,7 +29,7 @@ func main() {
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		// OnStartup:        stats.startup,
 		Bind: []interface{}{
-			app,
+			stats,
 		},
 	})
 
