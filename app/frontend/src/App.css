@@ -57,3 +57,19 @@
     border: none;
     background-color: rgba(255, 255, 255, 1);
 }
+
+#Graficas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #Pie {
+    width: 300px;
+    height: 300px;
+  }
+  
+  #Linea {
+    width: 300px;
+    height: 300px;
+  }
