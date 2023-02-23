@@ -1,75 +1,72 @@
-#app {
-    height: 100vh;
-    text-align: center;
-}
-
-#logo {
-    display: block;
-    width: 50%;
-    height: 50%;
-    margin: auto;
-    padding: 10% 0 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-origin: content-box;
+#App {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 .result {
-    height: 20px;
-    line-height: 20px;
-    margin: 1.5rem auto;
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
 }
 
-.input-box .btn {
-    width: 60px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 3px;
-    border: none;
-    margin: 0 0 0 20px;
-    padding: 0 8px;
-    cursor: pointer;
-}
-
-.input-box .btn:hover {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    color: #333333;
-}
-
-.input-box .input {
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    background-color: rgba(240, 240, 240, 1);
-    -webkit-font-smoothing: antialiased;
-}
-
-.input-box .input:hover {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.input-box .input:focus {
-    border: none;
-    background-color: rgba(255, 255, 255, 1);
+.result>span {
+    display: inline-block;
+    text-align: left;
 }
 
 #Graficas {
+    margin-top: 50px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-  }
-  
-  #Pie {
-    width: 300px;
-    height: 300px;
-  }
-  
-  #Linea {
-    width: 300px;
-    height: 300px;
-  }
+}
+
+#Pie,
+#Linea {
+    margin: 80px;
+    flex: 1;
+    width: 450px;
+    height: 450px;
+
+}
+
+@media (max-width: 768px) {
+    #Graficas div {
+        max-width: 100%;
+    }
+}
+
+.Resultados {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(245, 245, 245, 0.7);
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333333;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);   
+
+}
+
+.Resultados div {
+    margin: 20px;
+}
+
+#Resultados h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+#Resultados span {
+    font-size: 20px;
+    font-weight: 500;
+    /* text-shadow: 2px 2px 4px rgba(32, 178, 170, 0.5); */
+}

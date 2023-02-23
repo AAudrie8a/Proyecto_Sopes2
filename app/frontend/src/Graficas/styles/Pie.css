@@ -1,0 +1,19 @@
+  
+  /* Estilo de la etiqueta de la gráfica */
+  text {
+    font-size: 18px; /* tamaño de la fuente */
+    font-weight: bold; /* negrita */
+    fill: #555; /* color de la fuente */
+  }
+  
+  /* Estilo de la leyenda de la gráfica */
+  .legend {
+    font-size: 16px; /* tamaño de la fuente */
+    fill: #999; /* color de la fuente */
+  }
+  
+  /* Estilo de los datos de la gráfica */
+  .data {
+    stroke-width: 8; /* ancho de la línea */
+    fill-opacity: 0.8; /* opacidad del relleno */
+  }

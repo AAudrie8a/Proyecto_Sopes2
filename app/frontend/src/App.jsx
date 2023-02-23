@@ -1,102 +1,107 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
+import { useEffect, useState } from 'react';
 import './App.css';
-import {GetCPUUsage} from "../wailsjs/go/sys/Stats";
+import { GetCPUUsage } from "../wailsjs/go/sys/Stats";
 import PieChart from './Graficas/Pie';
 import MyLineChart from './Graficas/Linear';
 
 function App() {
-    const [resultText, setResultText] = useState('');
-    const [disk, setDisk] = useState('');
-    const [disk_free, setDisk_free] = useState('');
-    const [disk_total, setDisk_total] = useState('');
-    const [time, setTime] = useState(new Date());
-    const [tiempo, setTiempo] = useState([])
-    const [percentCPU, setPercent] = useState([])
-    const [data, setData] = useState({
-        labels: ['Disco Utilizado', 'Disco Libre'],
-        datasets: [
-          {
-            // data: [disk, disk_free, disk_total],
-            data: [3,8],
-            backgroundColor: ['#FF6384', '#36A2EB'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB' ]
-          }
-        ]
-    });
-    const [dataLine, setDataLine] = useState({
-      
-      labels: ['0:0'],
+  const [resultText, setResultText] = useState('');
+  const [disk, setDisk] = useState('');
+  const [diskFree, setDiskFree] = useState('');
+  const [diskTotal, setDiskTotal] = useState('');
+  const [time, setTime] = useState(new Date());
+  const [chartData, setChartData] = useState({
+    labels: ['Disco Utilizado', 'Disco Libre'],
+    datasets: [
+      {
+        data: [3, 8],
+        // backgroundColor: ['#00BFFF', '#4B0082'],
+        // hoverBackgroundColor: ['#00FFFF', '#800080']
+        // backgroundColor: ['#6495ED', '#9400D3'],
+        // hoverBackgroundColor: ['#00CED1', '#FF69B4']
+        // backgroundColor: ['#1E90FF', '#483D8B'],
+        // hoverBackgroundColor: ['#00BFFF', '#FF1493']
+        // backgroundColor: ['#4169E1', '#8A2BE2'],
+        // hoverBackgroundColor: ['#00CED1', '#DA70D6']
+        backgroundColor: ['#87CEEB', '#20B2AA'],
+        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
+      }
+    ]
+  });
+  const [lineChartData, setLineChartData] = useState({
+    labels: [`${time.getHours()}:${time.getMinutes()}`],
+    datasets: [
+      {
+        label: '% CPU en Uso',
+        data: [1],
+        fill: false,
+        borderColor: '#20B2AA'
+      }
+    ]
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      GetCPUUsage().then((result) => {
+        updateResultText(result);
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const updateResultText = (result) => {
+    const currentTime = new Date();
+    setResultText(`${result.avg}%`);
+    setDisk(`${result.disk} GB`);
+    setDiskFree(`${result.disk_free} GB`);
+    setDiskTotal(`${result.total_disk} GB`);
+    setTime(new Date());
+    setChartData({
+      labels: ['Disco Utilizado', 'Disco Libre'],
       datasets: [
         {
-          label: '% CPU en Uso',
-          data: [1],
-          fill: false,
-          borderColor: '#4B7BEC'
+          data: [result.disk, result.disk_free],
+          backgroundColor: ['#87CEEB', '#20B2AA'],
+        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
         }
       ]
     });
+    setLineChartData((prevState) => {
+      const newLabels = [...prevState.labels, `${currentTime.getHours()}:${currentTime.getMinutes()}`];
+      const newData = [...prevState.datasets[0].data, result.avg];
+      return {
+        labels: newLabels,
+        datasets: [
+          {
+            ...prevState.datasets[0],
+            data: newData
+          }
+        ]
+      };
+    });
+  };
 
-    const updateResultText = (result) => {
-        setResultText("CPU_Usage: "+result.avg + "%");
-        setDisk("Disco Utilizado:"+result.disk+" GB");
-        setDisk_free("Disco Libre: "+result.disk_free+" GB");
-        setDisk_total("Disco Total: "+result.total_disk+" GB");
-        setData({
-            labels: ['Disco Utilizado', 'Disco Libre'],
-            datasets: [
-              {
-                data: [result.disk, result.disk_free],
-                // data: [5,6,11],
-                backgroundColor: ['#FF6384', '#36A2EB'],
-                hoverBackgroundColor: ['#FF6384', '#36A2EB']
-              }
-            ]
-          });
-          
-          setTiempo(tiempo.concat(time.getHours()+":"+time.getMinutes()));
-          console.log(tiempo)
-          setPercent(percentCPU.concat(result.avg))
-          console.log(percentCPU)
-          setDataLine({
-            
-            labels: tiempo,
-            datasets: [
-              {
-                label: '% CPU en Uso',
-                data: percentCPU,
-                fill: true,
-                borderColor: '#4B7BEC'
-              }
-            ]
-          });
-    }
+  return (
+    <div id="App">
+      <div className='Resultados'>
+        <div id="result" className="result"><h1>Hora: </h1><span>{` ${time.getHours()}:${time.getMinutes()}`}</span></div>
+        <div id="result" className="result"><h1>CPU_Usage: </h1>{resultText}<span></span></div>
+        <div id="result" className="result"><h1>Disco Utilizado: </h1><span>{disk}</span></div>
+        <div id="result" className="result"><h1>Disco Libre: </h1><span>{diskFree}</span></div>
+        <div id="result" className="result"><h1>Disco Total: </h1><span>{diskTotal}</span></div>
+      </div>
 
-    function greet() {
-        GetCPUUsage().then(updateResultText);
-    }
-
-    setInterval(greet, 10000);
-    return (
-        <div id="App">
-            <div id="result" className="result">{resultText}</div>
-            <div id="result" className="result">{disk}</div>
-            <div id="result" className="result">{disk_free}</div>
-            <div id="result" className="result">{disk_total}</div>
-            <div id="Graficas">
-              <div id="Pie">
-              <PieChart data={data}/> 
-              </div>
-              <div id="Linea">
-              <MyLineChart data={dataLine}/>
-              </div>
-                
-                
-            </div>
-                      
+      <div id="Graficas">
+        <div id="Pie">
+          <PieChart data={chartData} />
         </div>
-        
-    )
+        <div id="Linea">
+          <MyLineChart data={lineChartData} />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
