@@ -34,7 +34,7 @@ function App() {
       {
         label: '% CPU en Uso',
         data: [1],
-        fill: false,
+        fill: true,
         borderColor: '#20B2AA'
       }
     ]
@@ -86,7 +86,7 @@ function App() {
     <div id="App">
       <div className='Resultados'>
         <div id="result" className="result"><h1>Hora: </h1><span>{` ${time.getHours()}:${time.getMinutes()}`}</span></div>
-        <div id="result" className="result"><h1>CPU_Usage: </h1>{resultText}<span></span></div>
+        <div id="result" className="result"><h1>CPU_Usage: </h1><span>{resultText}</span></div>
         <div id="result" className="result"><h1>Disco Utilizado: </h1><span>{disk}</span></div>
         <div id="result" className="result"><h1>Disco Libre: </h1><span>{diskFree}</span></div>
         <div id="result" className="result"><h1>Disco Total: </h1><span>{diskTotal}</span></div>
@@ -94,9 +94,11 @@ function App() {
 
       <div id="Graficas">
         <div id="Pie">
+          <h2>Disco</h2>
           <PieChart data={chartData} />
         </div>
         <div id="Linea">
+          <h2>CPU</h2>
           <MyLineChart data={lineChartData} />
         </div>
       </div>
