@@ -26,7 +26,7 @@ const MyLineChart = ({data}) => {
   
     return (
       <div>
-        <Line data={data} />
+        <Line data={data} options={{ animation: false }}/>
       </div>
     );
   };
