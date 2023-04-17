@@ -9,25 +9,33 @@ function App() {
   const [disk, setDisk] = useState('');
   const [diskFree, setDiskFree] = useState('');
   const [diskTotal, setDiskTotal] = useState('');
+  const [ramFree, setRamFree] = useState('');
+  const [ramUsage, setRamUsage] = useState('');
+  const [ramTotal, setRamTotal] = useState('');
   const [time, setTime] = useState(new Date());
+
   const [chartData, setChartData] = useState({
     labels: ['Disco Utilizado', 'Disco Libre'],
     datasets: [
       {
         data: [3, 8],
-        // backgroundColor: ['#00BFFF', '#4B0082'],
-        // hoverBackgroundColor: ['#00FFFF', '#800080']
-        // backgroundColor: ['#6495ED', '#9400D3'],
-        // hoverBackgroundColor: ['#00CED1', '#FF69B4']
-        // backgroundColor: ['#1E90FF', '#483D8B'],
-        // hoverBackgroundColor: ['#00BFFF', '#FF1493']
-        // backgroundColor: ['#4169E1', '#8A2BE2'],
-        // hoverBackgroundColor: ['#00CED1', '#DA70D6']
         backgroundColor: ['#87CEEB', '#20B2AA'],
         hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
       }
     ]
   });
+
+  const [chartDataRAM, setChartDataRAM] = useState({
+    labels: ['RAM Utilizado', 'RAM Libre'],
+    datasets: [
+      {
+        data: [3, 8],
+        backgroundColor: ['#87CEEB', '#20B2AA'],
+        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
+      }
+    ]
+  });
+
   const [lineChartData, setLineChartData] = useState({
     labels: [`${time.getHours()}:${time.getMinutes()}`],
     datasets: [
@@ -56,6 +64,9 @@ function App() {
     setDisk(`${result.disk} GB`);
     setDiskFree(`${result.disk_free} GB`);
     setDiskTotal(`${result.total_disk} GB`);
+    setRamFree(`${result.Ram_Free} GB`);
+    setRamUsage(`${result.Ram_Used} GB`);
+    setRamTotal(`${result.RAM_Total} GB`);
     setTime(new Date());
     setChartData({
       labels: ['Disco Utilizado', 'Disco Libre'],
@@ -67,6 +78,18 @@ function App() {
         }
       ]
     });
+
+    setChartDataRAM({
+      labels: ['RAM Utilizado', 'RAM Libre'],
+      datasets: [
+        {
+          data: [result.Ram_Used, result.Ram_Free],
+          backgroundColor: ['#87CEEB', '#20B2AA'],
+        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
+        }
+      ]
+    });
+
     setLineChartData((prevState) => {
       const newLabels = [...prevState.labels, `${currentTime.getHours()}:${currentTime.getMinutes()}`];
       const newData = [...prevState.datasets[0].data, result.avg];
@@ -90,12 +113,19 @@ function App() {
         <div id="result" className="result"><h1>Disco Utilizado: </h1><span>{disk}</span></div>
         <div id="result" className="result"><h1>Disco Libre: </h1><span>{diskFree}</span></div>
         <div id="result" className="result"><h1>Disco Total: </h1><span>{diskTotal}</span></div>
+        <div id="result" className="result"><h1>RAM Usado: </h1><span>{ramUsage}</span></div>
+        <div id="result" className="result"><h1>RAM Libre: </h1><span>{ramFree}</span></div>
+        <div id="result" className="result"><h1>RAM Total: </h1><span>{ramTotal}</span></div>
       </div>
 
       <div id="Graficas">
         <div id="Pie">
           <h2>Disco</h2>
           <PieChart data={chartData} />
+        </div>
+        <div id="Pie">
+          <h2>RAM</h2>
+          <PieChart data={chartDataRAM} />
         </div>
         <div id="Linea">
           <h2>CPU</h2>
