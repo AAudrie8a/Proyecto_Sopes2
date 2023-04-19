@@ -8,6 +8,7 @@ import (
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
 	"github.com/wailsapp/wails"
+
 )
 
 type Stats struct {
@@ -54,3 +55,5 @@ func (s *Stats) GetCPUUsage() *CPUUsage {
 		RAM_Total: int(math.Round(ramTotal/ (1024 * 1024 * 1024))),
 	}
 }
+
+

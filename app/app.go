@@ -22,6 +22,11 @@ func (a *App) startup(ctx context.Context) {
 }
 
 // Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hi %s, It's show time!", name)
+func (a *App) Greet(estado bool) string {
+	if(estado){
+		return fmt.Sprintf("Bloqueado")
+	} else{
+		return fmt.Sprintf("Desbloqueado")
+	}
+
 }
