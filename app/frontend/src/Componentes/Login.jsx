@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link /*useHistory */} from 'react-router-dom';
 import './styles/Login.css'; // Importar archivo CSS
+
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    user: '',
     password: ''
   });
 
-  // const history = useHistory();
+
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -22,6 +22,11 @@ const Login = () => {
     e.preventDefault();
     // Aquí puedes enviar los datos de inicio de sesión al servidor
     // y realizar la autenticación
+    if (formData.user == "audrie8a" && formData.password == "1234.") {
+      window.location.href = "/USB"
+    }else{
+      alert("Error al ingresar usuario y Contraseña.")
+    }
     console.log(formData);
     // Luego puedes redirigir al usuario a otra página
     // history.push('/USB');
@@ -30,18 +35,23 @@ const Login = () => {
   return (
     <div className="login-container">
       <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        </label>
-        <label>
-          Contraseña:
+      <form className='Form_Login' onSubmit={handleSubmit}>
+        <div className='Input_Data'>
+          <label>
+            Email:
+          </label>
+          <input type="user" name="user" value={formData.user} onChange={handleChange} />
+        </div>
+        <div className='Input_Data'>
+          <label>
+            Contraseña:
+          </label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} />
-        </label>
+        </div>
+
+
         <button type="submit">Iniciar Sesión</button>
       </form>
-      <p>¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link>.</p>
     </div>
   );
 };
