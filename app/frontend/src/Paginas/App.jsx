@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import './App.css';
-import { GetCPUUsage } from "../wailsjs/go/sys/Stats";
-import PieChart from './Graficas/Pie';
-import MyLineChart from './Graficas/Linear';
+import './styles/App.css';
+import { GetCPUUsage } from "../../wailsjs/go/sys/Stats";
+import PieChart from '../Graficas/Pie';
+import MyLineChart from '../Graficas/Linear';
+import Menu from '../Componentes/Menu';
 
 function App() {
   const [resultText, setResultText] = useState('');
@@ -74,7 +75,7 @@ function App() {
         {
           data: [result.disk, result.disk_free],
           backgroundColor: ['#87CEEB', '#20B2AA'],
-        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
+          hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
         }
       ]
     });
@@ -85,7 +86,7 @@ function App() {
         {
           data: [result.Ram_Used, result.Ram_Free],
           backgroundColor: ['#87CEEB', '#20B2AA'],
-        hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
+          hoverBackgroundColor: ['#ADD8E6', '#00FA9A']
         }
       ]
     });
@@ -106,33 +107,38 @@ function App() {
   };
 
   return (
-    <div id="App">
-      <div className='Resultados'>
-        <div id="result" className="result"><h1>Hora: </h1><span>{` ${time.getHours()}:${time.getMinutes()}`}</span></div>
-        <div id="result" className="result"><h1>CPU_Usage: </h1><span>{resultText}</span></div>
-        <div id="result" className="result"><h1>Disco Utilizado: </h1><span>{disk}</span></div>
-        <div id="result" className="result"><h1>Disco Libre: </h1><span>{diskFree}</span></div>
-        <div id="result" className="result"><h1>Disco Total: </h1><span>{diskTotal}</span></div>
-        <div id="result" className="result"><h1>RAM Usado: </h1><span>{ramUsage}</span></div>
-        <div id="result" className="result"><h1>RAM Libre: </h1><span>{ramFree}</span></div>
-        <div id="result" className="result"><h1>RAM Total: </h1><span>{ramTotal}</span></div>
-      </div>
+    <div>
+      <Menu />
+      <div id="App">
 
-      <div id="Graficas">
-        <div id="Pie">
-          <h2>Disco</h2>
-          <PieChart data={chartData} />
+        <div className='Resultados'>
+          <div id="result" className="result"><h1>Hora: </h1><span>{` ${time.getHours()}:${time.getMinutes()}`}</span></div>
+          <div id="result" className="result"><h1>CPU_Usage: </h1><span>{resultText}</span></div>
+          <div id="result" className="result"><h1>Disco Utilizado: </h1><span>{disk}</span></div>
+          <div id="result" className="result"><h1>Disco Libre: </h1><span>{diskFree}</span></div>
+          <div id="result" className="result"><h1>Disco Total: </h1><span>{diskTotal}</span></div>
+          <div id="result" className="result"><h1>RAM Usado: </h1><span>{ramUsage}</span></div>
+          <div id="result" className="result"><h1>RAM Libre: </h1><span>{ramFree}</span></div>
+          <div id="result" className="result"><h1>RAM Total: </h1><span>{ramTotal}</span></div>
         </div>
-        <div id="Pie">
-          <h2>RAM</h2>
-          <PieChart data={chartDataRAM} />
-        </div>
-        <div id="Linea">
-          <h2>CPU</h2>
-          <MyLineChart data={lineChartData} />
+
+        <div id="Graficas">
+          <div id="Pie">
+            <h2>Disco</h2>
+            <PieChart data={chartData} />
+          </div>
+          <div id="Pie">
+            <h2>RAM</h2>
+            <PieChart data={chartDataRAM} />
+          </div>
+          <div id="Linea">
+            <h2>CPU</h2>
+            <MyLineChart data={lineChartData} />
+          </div>
         </div>
       </div>
     </div>
+
   );
 }
 
