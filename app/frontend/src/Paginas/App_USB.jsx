@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Greet } from "../../wailsjs/go/main/App";
+import { Bitacora } from "../../wailsjs/go/main/App";
 import './styles/App_USB.css'
 import Menu from '../Componentes/Menu';
 
@@ -57,9 +58,16 @@ function App_USB() {
         }
 
     }
+
+    
     return (
         <div>
             <Menu Tipo={2} />
+            <div>
+                <button onClick={()=>Bitacora(1).then((result)=>alert(result))}>Bitácora</button>
+                <button onClick={()=>Bitacora(2).then((result)=> alert(result))}>Abrir</button>
+                <button onClick={()=>Bitacora(3).then((result)=>alert(result))}>Limpiar</button>
+            </div>
             <div>
                 {showButton &&
                     <div className='Botones2'>
