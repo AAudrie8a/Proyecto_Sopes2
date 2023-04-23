@@ -108,7 +108,7 @@ function App() {
 
   return (
     <div>
-      <Menu />
+      <Menu Tipo = {1}/>
       <div id="App">
 
         <div className='Resultados'>

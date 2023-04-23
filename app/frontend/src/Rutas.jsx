@@ -3,7 +3,10 @@ import Inicio from './Paginas/Inicio';
 import App from "./Paginas/App";
 import App_USB from "./Paginas/App_USB";
 import Inicio_Sesion from "./Paginas/InicioSesion";
+import Logout from "./Componentes/Logout";
 // import Login from "./Componentes/Login"
+
+
 function Rutas() {
     return (
         <BrowserRouter>
@@ -11,6 +14,7 @@ function Rutas() {
                 <Route path="/login" element={<Inicio_Sesion />} />
                 <Route path="/graficas" element={<App />} />
                 <Route path="/USB" element={<App_USB />} />
+                <Route path="/logout" element={<Logout />} />
                 <Route path="/" element={<App />} />
             </Routes>
         </BrowserRouter>

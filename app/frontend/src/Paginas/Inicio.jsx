@@ -5,7 +5,7 @@ import Menu from '../Componentes/Menu';
 export default function Inicio() {
     return (
         <div className='Inicio'>
-            <Menu/>
+            <Menu Tipo={1}/>
         </div>
     );
 }
