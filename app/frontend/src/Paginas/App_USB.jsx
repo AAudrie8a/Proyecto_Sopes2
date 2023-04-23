@@ -63,14 +63,14 @@ function App_USB() {
     return (
         <div>
             <Menu Tipo={2} />
-            <div>
+            <div className='Botones2'>
                 <button onClick={()=>Bitacora(1).then((result)=>alert(result))}>Bitácora</button>
                 <button onClick={()=>Bitacora(2).then((result)=> alert(result))}>Abrir</button>
                 <button onClick={()=>Bitacora(3).then((result)=>alert(result))}>Limpiar</button>
             </div>
             <div>
                 {showButton &&
-                    <div className='Botones2'>
+                    <div className='Botones3'>
                         <h1>{txtEstado}</h1>
                         <button onClick={changeState}>{nameButton}</button>
                     </div>}
