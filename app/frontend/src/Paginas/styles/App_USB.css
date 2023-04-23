@@ -100,15 +100,35 @@
     margin: 20px;
   }
 
-  .Botones3{
-    max-width: 300px;
-    height: 200px;
-    margin: 50px auto;
-    padding: 20px;
+  .Botones3 h1{
+    width: 300px;
+    height: 75px;
     background-color: rgba(245, 245, 245, 0.7);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     color: #333333;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
     transition: transform 0.2s ease-in-out;
     text-align: center;
+    margin: 0 auto -10px auto; 
+  }
+  .Botones3 button{
+    background-color: #20B2AA;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 7px 8px #87CEEB;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    width: 300px;
+    height: 75px;
+    font-size: 20px
+  }
+  
+  .Botones3 button:hover{
+    
+    background-color: #87CEEB;
+    color: #020202;
+    box-shadow: 0px 7px 8px #20B2AA;
   }
